@@ -7,7 +7,7 @@
 namespace Puer {
 
 	//==================================================================================================================
-	// Construct
+	// Construct & Destruct
 	//==================================================================================================================
 	Device::Device(void)
 		: m_pInclude(NULL)
@@ -18,23 +18,56 @@ namespace Puer {
 		, m_pDeviceContext(NULL)
 		, m_pBackBuffer(NULL)
 		, m_pBackBufferView(NULL)
-		, m_DepthStencilView(NULL)
-		, m_pRSCullBack(NULL)
-		, m_pRSCullNone(NULL)
-		, m_pBlendState(NULL)
-		, m_pBlendState_bg(NULL)
-		, m_pSamlerState(NULL)
 		, m_pDepthStencilState(NULL)
+		, m_pSamlerState(NULL)
+		, m_pBlendState_bg(NULL)
+		, m_pBlendState(NULL)
+		, m_pRSCullNone(NULL)
+		, m_pRSCullBack(NULL)
+		, m_DepthStencilView(NULL)
 		, m_pDepthStencilState_NoWrite(NULL)
 	{
 	}
 
-	//==================================================================================================================
-	// Destruct
-	//==================================================================================================================
 	Device::~Device(void)
 	{
 		Release();
+	}
+
+	void Device::Release()
+	{
+		//--------------------------------------------------------------------
+		// フルスクリーンならウィンドウモードに戻す
+		//--------------------------------------------------------------------
+		if (m_pDXGISwpChain != NULL)
+		{
+			BOOL IsFullscreen;
+			m_pDXGISwpChain->GetFullscreenState(&IsFullscreen, NULL);
+			if (IsFullscreen)
+			{
+				m_pDXGISwpChain->SetFullscreenState(FALSE, NULL);
+			}
+		}
+
+		//--------------------------------------------------------------------
+		// インターフェイス解放
+		//--------------------------------------------------------------------
+		SAFE_RELEASE(m_pDepthStencilState_NoWrite);
+		SAFE_RELEASE(m_DepthStencilView);
+		SAFE_RELEASE(m_pRSCullBack);
+		SAFE_RELEASE(m_pRSCullNone);
+		SAFE_RELEASE(m_pBlendState);
+		SAFE_RELEASE(m_pBlendState_bg);
+		SAFE_RELEASE(m_pSamlerState);
+		SAFE_RELEASE(m_pDepthStencilState);
+		SAFE_RELEASE(m_pBackBufferView);
+		SAFE_RELEASE(m_pBackBuffer);
+		SAFE_RELEASE(m_pDeviceContext);
+		SAFE_RELEASE(m_pDevice);
+		SAFE_RELEASE(m_pDXGISwpChain);
+		SAFE_RELEASE(m_pDXGIAdapter);
+		SAFE_RELEASE(m_pDXGIFactory);
+		SAFE_DELETE(m_pInclude);
 	}
 
 
@@ -585,44 +618,6 @@ namespace Puer {
 
 		return(hr);
 
-	}
-
-
-	//==================================================================================================================
-	// デバイスの解放
-	//==================================================================================================================
-	void Device::Release()
-	{
-		//--------------------------------------------------------------------
-		// フルスクリーンならウィンドウモードに戻す
-		//--------------------------------------------------------------------
-		if (m_pDXGISwpChain != NULL)
-		{
-			BOOL IsFullscreen;
-			m_pDXGISwpChain->GetFullscreenState(&IsFullscreen, NULL);
-			if (IsFullscreen)
-			{
-				m_pDXGISwpChain->SetFullscreenState(FALSE, NULL);
-			}
-		}
-
-		//--------------------------------------------------------------------
-		// インターフェイス解放
-		//--------------------------------------------------------------------
-		SAFE_RELEASE(m_pRSCullBack);
-		SAFE_RELEASE(m_pRSCullNone);
-		SAFE_RELEASE(m_pBlendState);
-		SAFE_RELEASE(m_pBlendState_bg);
-		SAFE_RELEASE(m_pSamlerState);
-		SAFE_RELEASE(m_pDepthStencilState);
-		SAFE_RELEASE(m_pBackBufferView);
-		SAFE_RELEASE(m_pBackBuffer);
-		SAFE_RELEASE(m_pDeviceContext);
-		SAFE_RELEASE(m_pDevice);
-		SAFE_RELEASE(m_pDXGISwpChain);
-		SAFE_RELEASE(m_pDXGIAdapter);
-		SAFE_RELEASE(m_pDXGIFactory);
-		SAFE_DELETE(m_pInclude);
 	}
 
 	//==================================================================================================================
