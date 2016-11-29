@@ -1,7 +1,7 @@
 /* 何処に入れるか不明なもの  ゴミ多し */
 
 #pragma once
-#include"../stdafx.h"
+#include"stdafx.h"
 
 #pragma pack(push, 1)
 
@@ -11,6 +11,117 @@
 #define _ALIGN_16 __declspec(align(16))
 #endif
 
+
+
+
+
+
+
+#pragma pack(push, 1)
+// DDSヘッダ構造体
+struct DDS_HEADER {
+public:
+	DWORD	dwMagic;	// == 0x20534444  ' SDD'
+	DWORD	dwSize;		// == 124
+	DWORD	dwFlags;	// ヘッダ内の有効な情報 DDSD_* の組み合わせ
+	DWORD	dwHeight;	// 画像の高さ x size
+	DWORD	dwWidth;	// 画像の幅   y size
+	DWORD	dwPitchOrLinearSize;	// 横1 line の byte 数 (pitch)
+									// または 1面分の byte 数 (linearsize)
+	DWORD	dwDepth;	// 画像の奥行き z size (Volume Texture 用)
+	DWORD	dwMipMapCount;	// 含まれている mipmap レベル数
+	DWORD	dwReserved1[11];
+	DWORD	dwPfSize;	// == 32
+	DWORD	dwPfFlags;	// pixel フォーマットを表す DDPF_* の組み合わせ
+	DWORD	dwFourCC;	// フォーマットが FourCC であらわされる場合のみ
+	DWORD	dwRGBBitCount;	// 1 pixel の bit 数
+	DWORD	dwRBitMask;	// RGB format 時の mask
+	DWORD	dwGBitMask;	// RGB format 時の mask
+	DWORD	dwBBitMask;	// RGB format 時の mask
+	DWORD	dwRGBAlphaBitMask;	// RGB format 時の mask
+	DWORD	dwCaps;		// mipmap 等のフラグ指定用
+	DWORD	dwCaps2;	// cube/volume texture 等のフラグ指定用
+	DWORD	dwReservedCaps[2];
+	DWORD	dwReserved2;
+};
+
+// Util的な
+_ALIGN_16 struct MATRIX4x3
+{
+	//public:
+	union {
+		struct {
+			float        _11, _12, _13, _14;
+			float        _21, _22, _23, _24;
+			float        _31, _32, _33, _34;
+		};
+		float m[3][4];
+	};
+};
+
+
+// LXM用。将来的にはモデル種類ごとにかえれるような・・
+_ALIGN_16
+struct POSTEFFECT_VERTEX
+{
+	D3DXVECTOR4 pos;
+	D3DXVECTOR2 uv;
+};
+
+// ピクセルシェーダー定数
+_ALIGN_16
+struct CB_PS_VIEWPORT
+{
+	float			fViewport[2];
+};
+
+// 頂点シェーダー用の定数
+_ALIGN_16
+struct CB_VS_GLOBAL
+{
+	D3DXMATRIXA16		matWVP;
+};
+// 頂点シェーダー用の定数(Null用)
+_ALIGN_16
+struct CB_VS_GLOBAL_NULL
+{
+	//		D3DXMATRIXA16		matWVP;
+	D3DXMATRIXA16		matNULL;
+	DWORD				boneIndex;
+};
+
+// ボーンマトリックス定数
+_ALIGN_16
+struct CB_VS_MATRIXPALETTE
+{
+	//		D3DXMATRIXA16	m_BoneMatrix[256];
+	MATRIX4x3		m_BoneMatrix_VRAM[256];
+};
+
+
+#ifdef MODEL_HEAD_SCALE_TEST
+// SCALE用の定数
+_ALIGN_16
+struct CB_VS_GLOBAL_SCALE
+{
+	D3DXVECTOR4		m_Scale;
+	D3DXVECTOR4		m_Offset;
+};
+#endif
+
+// OIT半透明
+_ALIGN_16 struct FragmentData
+{
+	unsigned int nColor;
+	float		 fDepth;
+};
+
+_ALIGN_16 struct FragmentLink
+{
+	FragmentData fragmentData;	// Fragment data
+	unsigned int nNext;			// Link to next fragment
+};
+#pragma pack (pop)
 
 // このあたりSharedPtrで囲うべきか
 #ifndef SAFE_RELEASE
@@ -166,109 +277,3 @@ struct SHADER_LOAD_TABLE
 };
 #pragma pack(pop)
 
-
-
-// Util的な
-_ALIGN_16 struct MATRIX4x3
-{
-	//public:
-	union {
-		struct {
-			float        _11, _12, _13, _14;
-			float        _21, _22, _23, _24;
-			float        _31, _32, _33, _34;
-		};
-		float m[3][4];
-	};
-};
-
-
-#pragma pack(push, 1)
-// DDSヘッダ構造体
-struct DDS_HEADER {
-public:
-	DWORD	dwMagic;	// == 0x20534444  ' SDD'
-	DWORD	dwSize;		// == 124
-	DWORD	dwFlags;	// ヘッダ内の有効な情報 DDSD_* の組み合わせ
-	DWORD	dwHeight;	// 画像の高さ x size
-	DWORD	dwWidth;	// 画像の幅   y size
-	DWORD	dwPitchOrLinearSize;	// 横1 line の byte 数 (pitch)
-									// または 1面分の byte 数 (linearsize)
-	DWORD	dwDepth;	// 画像の奥行き z size (Volume Texture 用)
-	DWORD	dwMipMapCount;	// 含まれている mipmap レベル数
-	DWORD	dwReserved1[11];
-	DWORD	dwPfSize;	// == 32
-	DWORD	dwPfFlags;	// pixel フォーマットを表す DDPF_* の組み合わせ
-	DWORD	dwFourCC;	// フォーマットが FourCC であらわされる場合のみ
-	DWORD	dwRGBBitCount;	// 1 pixel の bit 数
-	DWORD	dwRBitMask;	// RGB format 時の mask
-	DWORD	dwGBitMask;	// RGB format 時の mask
-	DWORD	dwBBitMask;	// RGB format 時の mask
-	DWORD	dwRGBAlphaBitMask;	// RGB format 時の mask
-	DWORD	dwCaps;		// mipmap 等のフラグ指定用
-	DWORD	dwCaps2;	// cube/volume texture 等のフラグ指定用
-	DWORD	dwReservedCaps[2];
-	DWORD	dwReserved2;
-};
-
-
-// LXM用。将来的にはモデル種類ごとにかえれるような・・
-_ALIGN_16
-struct POSTEFFECT_VERTEX
-{
-	D3DXVECTOR4 pos;
-	D3DXVECTOR2 uv;
-};
-
-// ピクセルシェーダー定数
-_ALIGN_16
-struct CB_PS_VIEWPORT
-{
-	float			fViewport[2];
-};
-
-// 頂点シェーダー用の定数
-_ALIGN_16
-struct CB_VS_GLOBAL
-{
-	D3DXMATRIXA16		matWVP;
-};
-// 頂点シェーダー用の定数(Null用)
-_ALIGN_16
-struct CB_VS_GLOBAL_NULL
-{
-	//		D3DXMATRIXA16		matWVP;
-	D3DXMATRIXA16		matNULL;
-	DWORD				boneIndex;
-};
-
-// ボーンマトリックス定数
-_ALIGN_16
-struct CB_VS_MATRIXPALETTE
-{
-	//		D3DXMATRIXA16	m_BoneMatrix[256];
-	MATRIX4x3		m_BoneMatrix_VRAM[256];
-};
-#ifdef MODEL_HEAD_SCALE_TEST
-// SCALE用の定数
-_ALIGN_16
-struct CB_VS_GLOBAL_SCALE
-{
-	D3DXVECTOR4		m_Scale;
-	D3DXVECTOR4		m_Offset;
-};
-#endif
-
-// OIT半透明
-_ALIGN_16 struct FragmentData
-{
-	unsigned int nColor;
-	float		 fDepth;
-};
-
-_ALIGN_16 struct FragmentLink
-{
-	FragmentData fragmentData;	// Fragment data
-	unsigned int nNext;			// Link to next fragment
-};
-#pragma pack (pop)

@@ -28,4 +28,7 @@
 #include <d3dcompiler.h>
 #include <vector>
 
+
+#include "misc.h"
+
 // TODO: プログラムに必要な追加ヘッダーをここで参照してください

@@ -1,8 +1,12 @@
 // DX11.cpp : アプリケーションのエントリ ポイントを定義します。
 //
 
+// ごちゃごちゃなので　もう1枚ラップしようかな
+
 #include "stdafx.h"
 #include "DX11.h"
+
+#include "DX\Device.h"
 
 #define MAX_LOADSTRING 100
 
@@ -10,6 +14,10 @@
 HINSTANCE hInst;                                // 現在のインターフェイス
 WCHAR szTitle[MAX_LOADSTRING];                  // タイトル バーのテキスト
 WCHAR szWindowClass[MAX_LOADSTRING];            // メイン ウィンドウ クラス名
+
+
+Puer::Device g_DX11Device;
+HWND g_hwnd = NULL;
 
 // このコード モジュールに含まれる関数の宣言を転送します:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -38,6 +46,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
+	g_DX11Device.Create(g_hwnd, 0);
+
+
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DX11));
 
     MSG msg;
@@ -51,6 +62,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             DispatchMessage(&msg);
         }
     }
+
+//	g_DX11Device.Release();
 
     return (int) msg.wParam;
 }
@@ -97,16 +110,16 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // グローバル変数にインスタンス処理を格納します。
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+   g_hwnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
-   if (!hWnd)
+   if (!g_hwnd)
    {
       return FALSE;
    }
 
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
+   ShowWindow(g_hwnd, nCmdShow);
+   UpdateWindow(g_hwnd);
 
    return TRUE;
 }

@@ -37,7 +37,7 @@
     <ClInclude Include="resource\Resource.h">
       <Filter>Resource\Header</Filter>
     </ClInclude>
-    <ClInclude Include="src\DX\misc.h">
+    <ClInclude Include="src\misc.h">
       <Filter>Src</Filter>
     </ClInclude>
   </ItemGroup>

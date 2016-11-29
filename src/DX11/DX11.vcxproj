@@ -152,7 +152,7 @@
     <ClInclude Include="resource\Resource.h" />
     <ClInclude Include="src\DX11.h" />
     <ClInclude Include="src\DX\Device.h" />
-    <ClInclude Include="src\DX\misc.h" />
+    <ClInclude Include="src\misc.h" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
