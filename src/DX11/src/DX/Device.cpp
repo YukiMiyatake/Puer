@@ -1,8 +1,12 @@
 #include"../stdafx.h"
 #include"Device.h"
 
+
+
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
+
+
 
 namespace Puer {
 
@@ -10,22 +14,6 @@ namespace Puer {
 	// Construct & Destruct
 	//==================================================================================================================
 	Device::Device(void)
-		: m_pInclude(NULL)
-		, m_pDXGIFactory(NULL)
-		, m_pDXGIAdapter(NULL)
-		, m_pDXGISwpChain(NULL)
-		, m_pDevice(NULL)
-		, m_pDeviceContext(NULL)
-		, m_pBackBuffer(NULL)
-		, m_pBackBufferView(NULL)
-		, m_pDepthStencilState(NULL)
-		, m_pSamlerState(NULL)
-		, m_pBlendState_bg(NULL)
-		, m_pBlendState(NULL)
-		, m_pRSCullNone(NULL)
-		, m_pRSCullBack(NULL)
-		, m_DepthStencilView(NULL)
-		, m_pDepthStencilState_NoWrite(NULL)
 	{
 	}
 
@@ -52,22 +40,22 @@ namespace Puer {
 		//--------------------------------------------------------------------
 		// インターフェイス解放
 		//--------------------------------------------------------------------
-		SAFE_RELEASE(m_pDepthStencilState_NoWrite);
-		SAFE_RELEASE(m_DepthStencilView);
-		SAFE_RELEASE(m_pRSCullBack);
-		SAFE_RELEASE(m_pRSCullNone);
-		SAFE_RELEASE(m_pBlendState);
-		SAFE_RELEASE(m_pBlendState_bg);
-		SAFE_RELEASE(m_pSamlerState);
-		SAFE_RELEASE(m_pDepthStencilState);
-		SAFE_RELEASE(m_pBackBufferView);
-		SAFE_RELEASE(m_pBackBuffer);
-		SAFE_RELEASE(m_pDeviceContext);
-		SAFE_RELEASE(m_pDevice);
-		SAFE_RELEASE(m_pDXGISwpChain);
-		SAFE_RELEASE(m_pDXGIAdapter);
-		SAFE_RELEASE(m_pDXGIFactory);
-		SAFE_DELETE(m_pInclude);
+//		SAFE_RELEASE(m_pDepthStencilState_NoWrite);
+//		SAFE_RELEASE(m_DepthStencilView);
+//		SAFE_RELEASE(m_pRSCullBack);
+//		SAFE_RELEASE(m_pRSCullNone);
+//		SAFE_RELEASE(m_pBlendState);
+//		SAFE_RELEASE(m_pBlendState_bg);
+//		SAFE_RELEASE(m_pSamlerState);
+//		SAFE_RELEASE(m_pDepthStencilState);
+//		SAFE_RELEASE(m_pBackBufferView);
+//		SAFE_RELEASE(m_pBackBuffer);
+//		SAFE_RELEASE(m_pDeviceContext);
+//		SAFE_RELEASE(m_pDevice);
+//		SAFE_RELEASE(m_pDXGISwpChain);
+//		SAFE_RELEASE(m_pDXGIAdapter);
+//		SAFE_RELEASE(m_pDXGIFactory);
+//		SAFE_DELETE(m_pInclude);
 	}
 
 
