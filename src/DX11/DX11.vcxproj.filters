@@ -17,6 +17,12 @@
     <Filter Include="Src\DX">
       <UniqueIdentifier>{b20119ea-a1dd-46e5-b754-2670a0d7a5ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\App">
+      <UniqueIdentifier>{f6833907-0c8b-43d2-bfb4-cebc25f9dcdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\shader">
+      <UniqueIdentifier>{842c54ed-416f-4ab7-b739-fd2877145c09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -40,6 +46,15 @@
     <ClInclude Include="src\misc.h">
       <Filter>Src</Filter>
     </ClInclude>
+    <ClInclude Include="src\App\app.h">
+      <Filter>Src\App</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DX\util.h">
+      <Filter>Src\DX</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DX\program.h">
+      <Filter>Src\DX</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DX\Device.cpp">
@@ -50,6 +65,15 @@
     </ClCompile>
     <ClCompile Include="src\stdafx.cpp">
       <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\App\app.cpp">
+      <Filter>Src\App</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DX\util.cpp">
+      <Filter>Src\DX</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DX\program.cpp">
+      <Filter>Src\DX</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,5 +88,10 @@
     <ResourceCompile Include="resource\DX11.rc">
       <Filter>Resource\Data</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\shader\forward.fx">
+      <Filter>Src\shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

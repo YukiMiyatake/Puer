@@ -6,7 +6,9 @@
 #include "stdafx.h"
 #include "DX11.h"
 
-#include "DX\Device.h"
+#include "DX/Device.h"
+#include "App/app.h"
+#include<memory>
 
 #define MAX_LOADSTRING 100
 
@@ -16,7 +18,9 @@ WCHAR szTitle[MAX_LOADSTRING];                  // タイトル バーのテキスト
 WCHAR szWindowClass[MAX_LOADSTRING];            // メイン ウィンドウ クラス名
 
 
-Puer::Device g_DX11Device;
+//std::unique_ptr<Puer::Device> g_DX11Device;
+std::unique_ptr<App> g_app;
+
 HWND g_hwnd = NULL;
 
 // このコード モジュールに含まれる関数の宣言を転送します:
@@ -46,7 +50,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
-	g_DX11Device.Create(g_hwnd, 0);
+	g_app = std::make_unique<App>(g_hwnd);
+	g_app->Init();
 
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DX11));
@@ -56,15 +61,20 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // メイン メッセージ ループ:
     while (GetMessage(&msg, nullptr, 0, 0))
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		else
+		{
+			g_app->Render();
+		}
+
     }
 
-//	g_DX11Device.Release();
 
+	g_app.reset();
     return (int) msg.wParam;
 }
 
