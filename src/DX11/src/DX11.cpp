@@ -56,11 +56,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_DX11));
 
-    MSG msg;
-
-    // メイン メッセージ ループ:
-    while (GetMessage(&msg, nullptr, 0, 0))
-    {
+	MSG msg = { 0 };
+	// メイン メッセージ ループ:
+	while (WM_QUIT != msg.message) {
 		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
