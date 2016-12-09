@@ -28,6 +28,7 @@ namespace Puer {
 			CComPtr<ID3D11GeometryShader>			geometryShader_;
 			CComPtr<ID3D11PixelShader>				pixelShader_;
 
+			CComPtr<ID3D11InputLayout>				vertex_layout_;
 
 		public:
 
@@ -59,6 +60,7 @@ namespace Puer {
 				ID3DX11ThreadPump *pPump
 			);
 
+			void SetLayout();
 
 
 

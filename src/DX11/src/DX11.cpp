@@ -66,6 +66,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 		else
 		{
+			g_app->Update();
 			g_app->Render();
 		}
 

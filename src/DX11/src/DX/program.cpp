@@ -84,7 +84,6 @@ namespace Puer {
 			HRESULT hr = S_OK;
 			ID3DBlob* ppBlobOut = nullptr;
 			ID3DBlob* pErrorBlob = nullptr;
-			CComPtr<ID3D11InputLayout>      vertex_layout;
 
 
 			if (szShaderModel == nullptr) {
@@ -99,12 +98,9 @@ namespace Puer {
 			if (FAILED(hr)) goto Err;
 
 			hr = device_.GetDevice()->CreateInputLayout(layout, size, (ppBlobOut)->GetBufferPointer(),
-				(ppBlobOut)->GetBufferSize(), &vertex_layout);
+				(ppBlobOut)->GetBufferSize(), &vertex_layout_);
 
 			if (FAILED(hr)) goto Err;
-
-			// Set the input layout
-			device_.GetImmediateContext()->IASetInputLayout(vertex_layout);
 
 
 
@@ -119,7 +115,6 @@ namespace Puer {
 
 			return(hr);
 		}
-
 
 
 
@@ -157,6 +152,13 @@ namespace Puer {
 
 			return(hr);
 		}
+
+		void Program::SetLayout() {
+			device_.GetImmediateContext()->IASetInputLayout(vertex_layout_);
+		}
+
+
+
 
 	}
 }

@@ -222,7 +222,7 @@ HRESULT InitDeviceDef()
     createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
 
-    D3D_DRIVER_TYPE driverTypes[] =
+    D3D_DRIVER_TYPE driverTypes [] =
     {
         D3D_DRIVER_TYPE_HARDWARE,
         D3D_DRIVER_TYPE_WARP,
@@ -1217,7 +1217,6 @@ void DeferredRender()
 	//*/
 
 	g_pImmediateContext->OMSetRenderTargets(0, nullptr, nullptr);
-
 
 
 	//2

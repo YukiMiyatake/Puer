@@ -44,9 +44,9 @@ namespace Puer {
 			CComPtr<ID3D11SamplerState>				m_pSamlerState;
 			CComPtr<ID3D11DepthStencilState>		m_pDepthStencilState;
 			CComPtr<ID3D11DepthStencilState>		m_pDepthStencilState_NoWrite;
-			D3D_FEATURE_LEVEL				m_FeatureLevel;
-			DXGI_SWAP_CHAIN_DESC			m_SwapChainDesc;
-			std::vector<DXGI_SAMPLE_DESC>	m_MultiSampleDescList;
+			D3D_FEATURE_LEVEL						m_FeatureLevel;
+			DXGI_SWAP_CHAIN_DESC					m_SwapChainDesc;
+			std::vector<DXGI_SAMPLE_DESC>			m_MultiSampleDescList;
 			//	std::vector<DXGI_MODE_DESC>		m_DisplayModeList;
 
 			D3D11_VIEWPORT					m_Viewport;
@@ -82,9 +82,12 @@ namespace Puer {
 			_inline IDXGISwapChain* GetSwapChain();
 			_inline D3D_FEATURE_LEVEL GetDeviceFeatureLevel();
 
-			_inline ID3D11Texture2D* GetBackBuffer(void) { return m_pBackBuffer; }
+			_inline ID3D11Texture2D& GetBackBuffer(void) { return *m_pBackBuffer; }
+			_inline ID3D11DepthStencilView& GetDepthStencilView(void) { return *m_DepthStencilView; }
 
 			HRESULT SetCullMode(ID3D11DeviceContext *pContext, D3D11_CULL_MODE cullmode);
+			
+			ID3D11SamplerState& GetLinerSampler() { return(*m_pSamlerState); };
 
 
 			void RestoreContext(ID3D11DeviceContext *pContext);
