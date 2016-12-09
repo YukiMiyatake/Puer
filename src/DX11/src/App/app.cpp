@@ -44,8 +44,7 @@ void App::Init() {
 	program_forward_->CreatePixelShaderFromFile(L"src/shader/forward.fx", "PS", nullptr, nullptr);
 
 
-
-
+	/*
 	SimpleVertex vertices[] =
 	{
 		{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
@@ -77,6 +76,39 @@ void App::Init() {
 		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
 		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
 		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
+	};
+*/
+	SimpleVertex vertices[] =
+	{
+		{ XMFLOAT4(-1.0f, 1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
+		{ XMFLOAT4(1.0f, 1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
+		{ XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
+		{ XMFLOAT4(-1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
+
+		{ XMFLOAT4(-1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
+		{ XMFLOAT4(1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
+		{ XMFLOAT4(1.0f, -1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
+		{ XMFLOAT4(-1.0f, -1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
+
+		{ XMFLOAT4(-1.0f, -1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT4(-1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT4(-1.0f, 1.0f, -1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT4(-1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+
+		{ XMFLOAT4(1.0f, -1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT4(1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT4(1.0f, 1.0f, -1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
+
+		{ XMFLOAT4(-1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
+		{ XMFLOAT4(1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
+		{ XMFLOAT4(1.0f, 1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
+		{ XMFLOAT4(-1.0f, 1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
+
+		{ XMFLOAT4(-1.0f, -1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
+		{ XMFLOAT4(1.0f, -1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
+		{ XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
+		{ XMFLOAT4(-1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
 	};
 
 	D3D11_BUFFER_DESC bd;
@@ -179,36 +211,41 @@ void App::Init() {
 	
 
 
-
-	ItaVertex vtIta[] =
 	{
-		{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) }
-	};
-	D3D11_BUFFER_DESC bd2;
-	ZeroMemory(&bd2, sizeof(bd2));
-	bd2.Usage = D3D11_USAGE_DEFAULT;
-	bd2.ByteWidth = sizeof(ItaVertex) * 20;
-	bd2.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	bd2.CPUAccessFlags = 0;
-	D3D11_SUBRESOURCE_DATA InitData2;
-	ZeroMemory(&InitData2, sizeof(InitData2));
-	InitData2.pSysMem = vtIta;
-	 hr = device_->GetDevice()->CreateBuffer(&bd2, &InitData2, &vertexBuffer_Deferred_light_);
+		ItaVertex vtIta[] =
+		{
+			{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
+			{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },
+			{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
+			{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) }
+		};
+		D3D11_BUFFER_DESC bd2;
+		ZeroMemory(&bd2, sizeof(bd2));
+		bd2.Usage = D3D11_USAGE_DEFAULT;
+		bd2.ByteWidth = sizeof(ItaVertex) * 20;
+		bd2.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+		bd2.CPUAccessFlags = 0;
+		D3D11_SUBRESOURCE_DATA InitData2;
+		ZeroMemory(&InitData2, sizeof(InitData2));
+		InitData2.pSysMem = vtIta;
+		hr = device_->GetDevice()->CreateBuffer(&bd2, &InitData2, &vertexBuffer_Deferred_light_);
 
-	// Define the input layout
-	D3D11_INPUT_ELEMENT_DESC layout2[] =
-	{
-		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT , D3D11_INPUT_PER_VERTEX_DATA, 0 }, 
-	};
-	UINT numElements2 = ARRAYSIZE(layout2);
-	program_deferred_light_ = device_->CreateProgram();
-	program_deferred_light_->CreateVertexShaderFromFile(L"src/shader/deferred_light.fx", "VS", layout2, numElements2, nullptr, nullptr);
-	program_deferred_light_->CreatePixelShaderFromFile(L"src/shader/deferred_light.fx", "PS", nullptr, nullptr);
+		// Define the input layout
+		D3D11_INPUT_ELEMENT_DESC layout2[] =
+		{
+			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+			{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT , D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		};
+		UINT numElements2 = ARRAYSIZE(layout2);
+		program_deferred_light_ = device_->CreateProgram();
+		program_deferred_light_->CreateVertexShaderFromFile(L"src/shader/deferred_light.fx", "VS", layout2, numElements2, nullptr, nullptr);
+		program_deferred_light_->CreatePixelShaderFromFile(L"src/shader/deferred_light.fx", "PS", nullptr, nullptr);
 
+		program_debug_ = device_->CreateProgram();
+		program_debug_->CreateVertexShaderFromFile(L"src/shader/deferred_light.fx", "VS", layout2, numElements, nullptr, nullptr);
+		program_debug_->CreatePixelShaderFromFile(L"src/shader/deferred_light.fx", "PSTex1", nullptr, nullptr);
+
+	}
 
 	// ----
 
@@ -277,20 +314,29 @@ void App::Update() {
 
 void App::Render(){
 
-	bool deferred = !true;
+	bool deferred = true;
 	if (deferred) {
 
 		//*  Path 1 GBuffer
 		// Clear the back buffer and GBuffer
 		float ClearColor[4] = { 0.0f, 0.0f, 0.0f, 0.0f }; // red, green, blue, alpha
+		ID3D11RenderTargetView *rtv[] = { rtv_[0].p, rtv_[1].p, rtv_[2].p, rtv_[3].p };
+
 		device_->GetImmediateContext()->ClearRenderTargetView(rtv_[0], ClearColor);
 		device_->GetImmediateContext()->ClearRenderTargetView(rtv_[1], ClearColor);
 		device_->GetImmediateContext()->ClearRenderTargetView(rtv_[2], ClearColor);
 		device_->GetImmediateContext()->ClearRenderTargetView(rtv_[3], ClearColor);
 
+//		device_->ClearDepth(device_->GetImmediateContext());
+		device_->GetImmediateContext()->ClearDepthStencilView(device_->m_DepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+
+
 		device_->GetImmediateContext()->OMSetRenderTargets(0, nullptr, nullptr);
-//		device_->m_pDeviceContext->OMSetRenderTargets(1, &device_->m_pBackBufferView.p, device_->m_DepthStencilView);
-		device_->GetImmediateContext()->OMSetRenderTargets(3, &rtv_[1].p, &device_->GetDepthStencilView());
+
+//		device_->GetImmediateContext()->OMSetRenderTargets(3, &rtv[1], &device_->GetDepthStencilView());
+		device_->GetImmediateContext()->OMSetRenderTargets(3, &rtv[1], device_->m_DepthStencilView);
+
+		program_deferred_->SetLayout();
 
 		// Set vertex buffer
 		UINT stride = sizeof(SimpleVertex);
@@ -306,21 +352,44 @@ void App::Render(){
 		// Render the cube
 		//
 		device_->GetImmediateContext()->VSSetShader(&program_deferred_->getVertexShader(), nullptr, 0);
-		program_deferred_->SetLayout();
 		device_->GetImmediateContext()->VSSetConstantBuffers(0, 1, &constantBuffer_.p);
 		device_->GetImmediateContext()->PSSetShader(&program_deferred_->getPixelShader(), nullptr, 0);
 		device_->GetImmediateContext()->PSSetConstantBuffers(0, 1, &constantBuffer_.p);
 		device_->GetImmediateContext()->DrawIndexed(36, 0, 0);
 
-		device_->GetImmediateContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+#if 1
+		// debug   Sampler、Layout、 RT、SRV、vertex、index等設定できるようにしよう・・
+		ID3D11SamplerState *ss = &device_->GetLinerSampler();
+		device_->GetImmediateContext()->PSSetSamplers(0, 1, &ss);
+		device_->GetImmediateContext()->OMSetRenderTargets(1, &rtv_[0].p, nullptr);
+		program_debug_->SetLayout();
 
 
-		device_->Present();
-		return;
 
+		stride = sizeof(ItaVertex);
+		offset = 0;
+		device_->GetImmediateContext()->IASetVertexBuffers(0, 1, &vertexBuffer_Deferred_light_.p, &stride, &offset);
+
+		device_->GetImmediateContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+
+		device_->GetImmediateContext()->VSSetShader(&program_debug_->getVertexShader(), NULL, 0);
+		device_->GetImmediateContext()->VSSetConstantBuffers(0, 1, &constantBuffer_.p);
+		device_->GetImmediateContext()->PSSetShader(&program_debug_->getPixelShader(), NULL, 0);
+		device_->GetImmediateContext()->PSSetConstantBuffers(0, 1, &constantBuffer_.p);
+
+		ID3D11ShaderResourceView* psrv[] = { srv_gbuf_pos_.p, srv_gbuf_normaldepth_.p, srv_gbuf_diffuse_.p, 0 };
+		device_->GetImmediateContext()->PSSetShaderResources(0, 3, psrv);
+		//	g_pImmediateContext->PSSetShaderResources(1, 1, &g_pSRV_GBuf_NormalDepth);
+		//	g_pImmediateContext->PSSetShaderResources(2, 1, &g_pSRV_GBuf_Diffuse);
+		device_->GetImmediateContext()->Draw(6, 0);
+
+#endif
+	
+#if 0
 		// path 2  Light
 		ID3D11SamplerState *ss = &device_->GetLinerSampler();
-//		device_->GetImmediateContext()->PSSetSamplers(0, 1, &ss );
+		device_->GetImmediateContext()->PSSetSamplers(0, 1, &ss );
 		device_->GetImmediateContext()->OMSetRenderTargets(1, &rtv_[0].p, nullptr);
 		//	g_pImmediateContext->OMSetRenderTargets(1, &g_pRenderTargetView[0], g_pDepthStencilView);
 		program_deferred_light_->SetLayout();
@@ -338,7 +407,7 @@ void App::Render(){
 		device_->GetImmediateContext()->PSSetShader(&program_deferred_light_->getPixelShader(), NULL, 0);
 		device_->GetImmediateContext()->PSSetConstantBuffers(0, 1, &constantBuffer_.p);
 
-		ID3D11ShaderResourceView* psrv[] = { srv_gbuf_pos_.p, srv_gbuf_normaldepth_.p, srv_gbuf_normaldepth_.p, 0 };
+		ID3D11ShaderResourceView* psrv[] = { srv_gbuf_pos_.p, srv_gbuf_normaldepth_.p, srv_gbuf_diffuse_.p, 0 };
 		device_->GetImmediateContext()->PSSetShaderResources(0, 3, psrv);
 		//	g_pImmediateContext->PSSetShaderResources(1, 1, &g_pSRV_GBuf_NormalDepth);
 		//	g_pImmediateContext->PSSetShaderResources(2, 1, &g_pSRV_GBuf_Diffuse);
@@ -348,8 +417,7 @@ void App::Render(){
 		//*/
 
 
-
-
+#endif
 
 		ID3D11ShaderResourceView* hoge[3] = { NULL };
 

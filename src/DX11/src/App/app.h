@@ -21,7 +21,7 @@ class App {
 public:
 	struct SimpleVertex
 	{
-		XMFLOAT3 Pos;
+		XMFLOAT4 Pos;
 		XMFLOAT3 Normal;
 	};
 	struct ItaVertex
@@ -62,6 +62,7 @@ protected:
 
 	CComPtr<ID3D11RenderTargetView>				rtv_[4];
 
+	std::unique_ptr<Puer::DX11::Program>		program_debug_;
 
 public:
 	XMMATRIX                world_;

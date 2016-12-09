@@ -1142,6 +1142,22 @@ void DeferredRender()
 	vLightDir = XMVector3Transform(vLightDir, mRotate);
 	XMStoreFloat4(&vLightDirs[1], vLightDir);
 
+	//
+	// Update matrix variables and lighting variables
+	//
+	ConstantBuffer cb1;
+	cb1.mWorld = XMMatrixTranspose(g_World);
+	cb1.mView = XMMatrixTranspose(g_View);
+	cb1.mProjection = XMMatrixTranspose(g_Projection);
+	cb1.vLightDir[0] = vLightDirs[0];
+	cb1.vLightDir[1] = vLightDirs[1];
+	cb1.vLightColor[0] = vLightColors[0];
+	cb1.vLightColor[1] = vLightColors[1];
+	cb1.vOutputColor = XMFLOAT4(0, 0, 0, 0);
+	g_pImmediateContext->UpdateSubresource(g_pConstantBuffer, 0, NULL, &cb1, 0, 0);
+
+
+
 	UINT stride ;
 	UINT offset;
 
@@ -1158,7 +1174,7 @@ void DeferredRender()
 
 	//*
 	g_pImmediateContext->OMSetRenderTargets(0, nullptr, nullptr);
-	g_pImmediateContext->OMSetRenderTargets(3, &g_pRenderTargetView[1], g_pDepthStencilView);
+	g_pImmediateContext->OMSetRenderTargets(3, &g_pRenderTargetView[0], g_pDepthStencilView);
 	//g_pImmediateContext->OMSetRenderTargets(1, &g_pRenderTargetView[0], g_pDepthStencilView);
 	
 	g_pImmediateContext->IASetInputLayout(g_pVertexLayout_Def);
@@ -1174,20 +1190,6 @@ void DeferredRender()
 	 offset = 0;
 	g_pImmediateContext->IASetVertexBuffers(0, 1, &g_pVertexBuffer, &stride, &offset);
 	//
-	// Update matrix variables and lighting variables
-	//
-	ConstantBuffer cb1;
-	cb1.mWorld = XMMatrixTranspose(g_World);
-	cb1.mView = XMMatrixTranspose(g_View);
-	cb1.mProjection = XMMatrixTranspose(g_Projection);
-	cb1.vLightDir[0] = vLightDirs[0];
-	cb1.vLightDir[1] = vLightDirs[1];
-	cb1.vLightColor[0] = vLightColors[0];
-	cb1.vLightColor[1] = vLightColors[1];
-	cb1.vOutputColor = XMFLOAT4(0, 0, 0, 0);
-	g_pImmediateContext->UpdateSubresource(g_pConstantBuffer, 0, NULL, &cb1, 0, 0);
-
-	//
 	// Render the cube
 	//
 	g_pImmediateContext->VSSetShader(g_pVSDef, NULL, 0);
@@ -1199,6 +1201,7 @@ void DeferredRender()
 	//
 	// Render each light
 	//
+	/*
 	for (int m = 0; m < 2; m++)
 	{
 		XMMATRIX mLight = XMMatrixTranslationFromVector(5.0f * XMLoadFloat4(&vLightDirs[m]));
@@ -1213,12 +1216,12 @@ void DeferredRender()
 //		g_pImmediateContext->PSSetShader(g_pPixelShaderSolid, NULL, 0);
 		g_pImmediateContext->DrawIndexed(36, 0, 0);
 	}
-	
+	*/
 	//*/
 
 	g_pImmediateContext->OMSetRenderTargets(0, nullptr, nullptr);
 
-
+#if 0
 	//2
 	g_pImmediateContext->PSSetSamplers(0, 1, &g_pSamplerState);
 	g_pImmediateContext->OMSetRenderTargets(1, &g_pRenderTargetView[0], nullptr);
@@ -1247,7 +1250,7 @@ void DeferredRender()
 
 	//*/
 
-
+#endif
 
 
 

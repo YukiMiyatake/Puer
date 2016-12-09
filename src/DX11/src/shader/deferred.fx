@@ -10,7 +10,7 @@ cbuffer ConstantBuffer : register(b0)
 	float4 Diffuse;
 	float4 vLightDir[2];
 	float4 vLightColor[2];
-	float4 vOutputColor;
+//	float4 vOutputColor;
 }
 
 
@@ -31,8 +31,8 @@ struct PS_INPUT
 
 struct PS_OUTPUT
 {
-	float4 Position		: SV_Target0;
-	float4 NormalDepth	: SV_Target1;
+	float4 Position		: SV_Target1;
+	float4 NormalDepth	: SV_Target0;
 	float4 DiffuseAlbedo: SV_Target2;
 };
 

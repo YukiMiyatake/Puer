@@ -212,13 +212,18 @@ namespace Puer {
 			m_SwapChainDesc.SwapEffect					= DXGI_SWAP_EFFECT_DISCARD;					// 画面更新の方法
 			m_SwapChainDesc.Flags						= DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;	// スワップチェインのフラグ
 			*/
-
+			/*
+			RECT rc;
+			GetClientRect(hWnd, &rc);
+			UINT width = rc.right - rc.left;
+			UINT height = rc.bottom - rc.top;
+			*/
 			DXGI_MODE_DESC sd;
 
 			// ディスプレイモードを固定で選択する場合のサンプルコード
 			::ZeroMemory(&sd, sizeof(sd));
-			sd.Width = 1920;
-			sd.Height = 1200;
+			sd.Width = m_Rect.right - m_Rect.left;
+			sd.Height = m_Rect.bottom - m_Rect.top;
 			sd.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 			sd.RefreshRate.Numerator = 60;
 			sd.RefreshRate.Denominator = 1;

@@ -117,3 +117,9 @@ float4 PSSolid(LightVSInput input) : SV_Target
 {
 	return vOutputColor;
 }
+
+float4 PSTex1(LightVSInput input) : SV_Target
+{
+	return 	PositionSmp.Sample(samLinear, input.TexCoord);
+;
+}

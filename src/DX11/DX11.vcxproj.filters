@@ -93,11 +93,13 @@
     <None Include="src\shader\deferred_light.fx">
       <Filter>Src\shader</Filter>
     </None>
-    <None Include="src\shader\deferred.fx">
-      <Filter>Src\shader</Filter>
-    </None>
     <None Include="src\shader\forward.fx">
       <Filter>Src\shader</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="src\shader\deferred.fx">
+      <Filter>Src\shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
