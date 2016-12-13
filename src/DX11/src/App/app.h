@@ -3,6 +3,7 @@
 #include<memory>
 
 #include <xnamath.h>
+#include "../DX/util.h"
 
 #include "../DX/program.h"
 
@@ -19,16 +20,7 @@ namespace Puer {
 
 class App {
 public:
-	struct SimpleVertex
-	{
-		XMFLOAT3 Pos;
-		XMFLOAT3 Normal;
-	};
-	struct ItaVertex
-	{
-		XMFLOAT3 Pos;
-		XMFLOAT2 uv;
-	};
+
 	struct ConstantBuffer
 	{
 		XMMATRIX mWorld;

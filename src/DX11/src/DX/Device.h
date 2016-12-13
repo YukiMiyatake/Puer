@@ -35,17 +35,18 @@ namespace Puer {
 			CComPtr<ID3D11RenderTargetView>			m_pBackBufferView;
 
 			CComPtr<ID3D11DepthStencilView>			m_DepthStencilView;
+			DXGI_SWAP_CHAIN_DESC					m_SwapChainDesc;
+
 
 			// Sampler以下は外に出したいなーーと
 			CComPtr<ID3D11RasterizerState>			m_pRSCullBack;
 			CComPtr<ID3D11RasterizerState>			m_pRSCullNone;
-			CComPtr<ID3D11BlendState>				m_pBlendState;
-			CComPtr<ID3D11BlendState>				m_pBlendState_bg;
+//			CComPtr<ID3D11BlendState>				m_pBlendState;
+//			CComPtr<ID3D11BlendState>				m_pBlendState_bg;
 			CComPtr<ID3D11SamplerState>				m_pSamlerState;
 			CComPtr<ID3D11DepthStencilState>		m_pDepthStencilState;
 			CComPtr<ID3D11DepthStencilState>		m_pDepthStencilState_NoWrite;
 			D3D_FEATURE_LEVEL						m_FeatureLevel;
-			DXGI_SWAP_CHAIN_DESC					m_SwapChainDesc;
 			std::vector<DXGI_SAMPLE_DESC>			m_MultiSampleDescList;
 			//	std::vector<DXGI_MODE_DESC>		m_DisplayModeList;
 
@@ -88,6 +89,9 @@ namespace Puer {
 			HRESULT SetCullMode(ID3D11DeviceContext *pContext, D3D11_CULL_MODE cullmode);
 			
 			ID3D11SamplerState& GetLinerSampler() { return(*m_pSamlerState); };
+
+			HRESULT CreateBuffer( void *buffer, int byteWidth, D3D11_BIND_FLAG bind, CComPtr<ID3D11Buffer> &vertexBuffer_);
+
 
 
 			void RestoreContext(ID3D11DeviceContext *pContext);

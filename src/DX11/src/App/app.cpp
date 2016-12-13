@@ -3,7 +3,6 @@
 
 
 #include "app.h"
-#include "../DX/util.h"
 #include "../DX/program.h"
 
 
@@ -28,139 +27,21 @@ void App::Init() {
 	GetClientRect(hwnd_, &rc);
 	UINT width = rc.right - rc.left;
 	UINT height = rc.bottom - rc.top;
-
+	HRESULT hr;
 
 	// Define the input layout
-	D3D11_INPUT_ELEMENT_DESC layout[] =
-	{
-		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-	};
-	UINT numElements = ARRAYSIZE(layout);
+	UINT numElements = Puer::Util::simpleInputLayoutCount();
 
 
 	program_forward_ = device_->CreateProgram();
-	program_forward_->CreateVertexShaderFromFile(L"src/shader/forward.fx", "VS", layout, numElements, nullptr, nullptr);
+	program_forward_->CreateVertexShaderFromFile(L"src/shader/forward.fx", "VS", Puer::Util::simpleInputLayout, numElements, nullptr, nullptr);
 	program_forward_->CreatePixelShaderFromFile(L"src/shader/forward.fx", "PS", nullptr, nullptr);
 
-
-	/*
-	SimpleVertex vertices[] =
-	{
-		{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
-		{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-
-		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
-	};
-*/
-	SimpleVertex vertices[] =
-	{
-		{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
-		{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-
-		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
-
-		{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
-		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
-		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
-		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) }, };
-
-	D3D11_BUFFER_DESC bd;
-	ZeroMemory(&bd, sizeof(bd));
-	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.ByteWidth = sizeof(SimpleVertex) * 24;
-	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	bd.CPUAccessFlags = 0;
-	D3D11_SUBRESOURCE_DATA InitData;
-	ZeroMemory(&InitData, sizeof(InitData));
-	InitData.pSysMem = vertices;
-	HRESULT hr = device_->GetDevice()->CreateBuffer(&bd, &InitData, &vertexBuffer_);
+	hr = device_->CreateBuffer(Puer::Util::simpleBoxVertex, sizeof(Puer::Util::SimpleVertex) * 24, D3D11_BIND_VERTEX_BUFFER, vertexBuffer_);
+	hr = device_->CreateBuffer(Puer::Util::simpleBoxIndex, sizeof(WORD) * 36, D3D11_BIND_INDEX_BUFFER, indexBuffer_);
+	hr = device_->CreateBuffer( nullptr, sizeof(ConstantBuffer), D3D11_BIND_CONSTANT_BUFFER, constantBuffer_);
 
 
-
-
-
-	// Create index buffer
-	WORD indices[] =
-	{
-		3,1,0,
-		2,1,3,
-
-		6,4,5,
-		7,4,6,
-
-		11,9,8,
-		10,9,11,
-
-		14,12,13,
-		15,12,14,
-
-		19,17,16,
-		18,17,19,
-
-		22,20,21,
-		23,20,22
-	};
-	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.ByteWidth = sizeof(WORD) * 36;        // 36 vertices needed for 12 triangles in a triangle list
-	bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	bd.CPUAccessFlags = 0;
-	InitData.pSysMem = indices;
-	hr = device_->GetDevice()->CreateBuffer(&bd, &InitData, &indexBuffer_);
-
-
-	// Create the constant buffer
-	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.ByteWidth = sizeof(ConstantBuffer);
-	bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	bd.CPUAccessFlags = 0;
-	hr = device_->GetDevice()->CreateBuffer(&bd, NULL, &constantBuffer_);
-	
 	// ---- DeferredShading
 	// MRT RenderTargetView
 	
@@ -205,43 +86,22 @@ void App::Init() {
 
 
 	program_deferred_ = device_->CreateProgram();
-	program_deferred_->CreateVertexShaderFromFile(L"src/shader/deferred.fx", "VS", layout, numElements, nullptr, nullptr);
+	program_deferred_->CreateVertexShaderFromFile(L"src/shader/deferred.fx", "VS", Puer::Util::simpleInputLayout, numElements, nullptr, nullptr);
 	program_deferred_->CreatePixelShaderFromFile(L"src/shader/deferred.fx", "PS", nullptr, nullptr);
 	
 
 
 	{
-		ItaVertex vtIta[] =
-		{
-			{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f) },
-			{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f) },
-			{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f) },
-			{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f) }
-		};
-		D3D11_BUFFER_DESC bd2;
-		ZeroMemory(&bd2, sizeof(bd2));
-		bd2.Usage = D3D11_USAGE_DEFAULT;
-		bd2.ByteWidth = sizeof(ItaVertex) * 20;
-		bd2.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-		bd2.CPUAccessFlags = 0;
-		D3D11_SUBRESOURCE_DATA InitData2;
-		ZeroMemory(&InitData2, sizeof(InitData2));
-		InitData2.pSysMem = vtIta;
-		hr = device_->GetDevice()->CreateBuffer(&bd2, &InitData2, &vertexBuffer_Deferred_light_);
 
-		// Define the input layout
-		D3D11_INPUT_ELEMENT_DESC layout2[] =
-		{
-			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-			{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT , D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		};
-		UINT numElements2 = ARRAYSIZE(layout2);
+		hr = device_->CreateBuffer(Puer::Util::itaVertex, sizeof(Puer::Util::ItaVertex) * 20, D3D11_BIND_VERTEX_BUFFER, vertexBuffer_Deferred_light_);
+
+
 		program_deferred_light_ = device_->CreateProgram();
-		program_deferred_light_->CreateVertexShaderFromFile(L"src/shader/deferred_light.fx", "VS", layout2, numElements2, nullptr, nullptr);
+		program_deferred_light_->CreateVertexShaderFromFile(L"src/shader/deferred_light.fx", "VS", Puer::Util::ItaInputLayout, Puer::Util::itaInputLayoutCount(), nullptr, nullptr);
 		program_deferred_light_->CreatePixelShaderFromFile(L"src/shader/deferred_light.fx", "PS", nullptr, nullptr);
 
 		program_debug_ = device_->CreateProgram();
-		program_debug_->CreateVertexShaderFromFile(L"src/shader/deferred_light.fx", "VS", layout2, numElements, nullptr, nullptr);
+		program_debug_->CreateVertexShaderFromFile(L"src/shader/deferred_light.fx", "VS", Puer::Util::ItaTexInputLayout, Puer::Util::itaTexInputLayoutCount(), nullptr, nullptr);
 		program_debug_->CreatePixelShaderFromFile(L"src/shader/deferred_light.fx", "PSTex1", nullptr, nullptr);
 
 	}
@@ -338,7 +198,7 @@ void App::Render(){
 		program_deferred_->SetLayout();
 
 		// Set vertex buffer
-		UINT stride = sizeof(SimpleVertex);
+		UINT stride = sizeof(Puer::Util::SimpleVertex);
 		UINT offset = 0;
 		device_->GetImmediateContext()->IASetVertexBuffers(0, 1, &vertexBuffer_.p, &stride, &offset);
 
@@ -396,7 +256,7 @@ void App::Render(){
 
 
 
-		stride = sizeof(ItaVertex);
+		stride = sizeof(Puer::Util::ItaVertex);
 		offset = 0;
 		device_->GetImmediateContext()->IASetVertexBuffers(0, 1, &vertexBuffer_Deferred_light_.p, &stride, &offset);
 
@@ -445,7 +305,7 @@ void App::Render(){
 
 
 		// Set vertex buffer
-		UINT stride = sizeof(SimpleVertex);
+		UINT stride = sizeof(Puer::Util::SimpleVertex);
 		UINT offset = 0;
 		device_->GetImmediateContext()->IASetVertexBuffers(0, 1, &vertexBuffer_.p, &stride, &offset);
 

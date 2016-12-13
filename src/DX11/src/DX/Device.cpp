@@ -409,7 +409,7 @@ namespace Puer {
 			// ラスタライザーステート生成
 			//----------------------------------------------------------------------
 			{
-#if 0
+#if 1
 				D3D11_RASTERIZER_DESC RasterizerDesc = {
 					D3D11_FILL_SOLID,	// D3D11_FILL_MODE FillMode;
 					D3D11_CULL_BACK,	// D3D11_CULL_MODE CullMode;
@@ -528,7 +528,7 @@ namespace Puer {
 			pContext->PSSetSamplers(0, 1, pSamplerTbl);
 			pContext->RSSetState(m_pRSCullBack);
 			pContext->OMSetDepthStencilState(m_pDepthStencilState, 0);
-			pContext->OMSetBlendState(m_pBlendState, NULL, 0xFFFFFFFF);
+//			pContext->OMSetBlendState(m_pBlendState, NULL, 0xFFFFFFFF);
 		}
 
 
@@ -624,8 +624,25 @@ namespace Puer {
 		}
 
 
+		HRESULT Device::CreateBuffer(void *buffer, int byteWidth, D3D11_BIND_FLAG bind, CComPtr<ID3D11Buffer> &vertexBuffer_){
+			
+			D3D11_BUFFER_DESC bd;
+			ZeroMemory(&bd, sizeof(bd));
+			bd.Usage = D3D11_USAGE_DEFAULT;
+			bd.ByteWidth = byteWidth;
+			bd.BindFlags = bind;
+			bd.CPUAccessFlags = 0;
 
+			D3D11_SUBRESOURCE_DATA *pdata = nullptr;
+			D3D11_SUBRESOURCE_DATA InitData;
+			if (buffer) {
+				ZeroMemory(&InitData, sizeof(InitData));
+				InitData.pSysMem = buffer;
+				pdata = &InitData;
+			}
 
+			return( m_pDevice->CreateBuffer(&bd, pdata, &vertexBuffer_));
+		}
 
 	}
 }

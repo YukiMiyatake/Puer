@@ -23,6 +23,9 @@
     <Filter Include="Src\shader">
       <UniqueIdentifier>{842c54ed-416f-4ab7-b739-fd2877145c09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\DX\shader">
+      <UniqueIdentifier>{7ef8d06f-c95a-46eb-b9a9-2528579bbfc8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
