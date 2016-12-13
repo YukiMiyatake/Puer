@@ -1174,7 +1174,7 @@ void DeferredRender()
 
 	//*
 	g_pImmediateContext->OMSetRenderTargets(0, nullptr, nullptr);
-	g_pImmediateContext->OMSetRenderTargets(3, &g_pRenderTargetView[0], g_pDepthStencilView);
+	g_pImmediateContext->OMSetRenderTargets(3, &g_pRenderTargetView[1], g_pDepthStencilView);
 	//g_pImmediateContext->OMSetRenderTargets(1, &g_pRenderTargetView[0], g_pDepthStencilView);
 	
 	g_pImmediateContext->IASetInputLayout(g_pVertexLayout_Def);
@@ -1221,7 +1221,6 @@ void DeferredRender()
 
 	g_pImmediateContext->OMSetRenderTargets(0, nullptr, nullptr);
 
-#if 0
 	//2
 	g_pImmediateContext->PSSetSamplers(0, 1, &g_pSamplerState);
 	g_pImmediateContext->OMSetRenderTargets(1, &g_pRenderTargetView[0], nullptr);
@@ -1250,15 +1249,15 @@ void DeferredRender()
 
 	//*/
 
-#endif
+
 
 
 
 	ID3D11ShaderResourceView* hoge[3] = { NULL };
 
 	g_pImmediateContext->PSSetShader(NULL, NULL, 0);
-	g_pImmediateContext->PSSetShaderResources(0, 1, hoge);
-	g_pImmediateContext->PSSetShaderResources(1, 1, hoge);
+	g_pImmediateContext->PSSetShaderResources(0, 3, hoge);
+	//g_pImmediateContext->PSSetShaderResources(1, 1, hoge);
 	//g_pImmediateContext->PSSetShaderResources(2, 1, hoge);
 
 

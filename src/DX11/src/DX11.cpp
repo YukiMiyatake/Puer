@@ -18,6 +18,12 @@ WCHAR szTitle[MAX_LOADSTRING];                  // タイトル バーのテキスト
 WCHAR szWindowClass[MAX_LOADSTRING];            // メイン ウィンドウ クラス名
 
 
+//
+#include<atlbase.h>
+#include <d3d11.h>
+#include <d3dx11.h>
+//
+
 //std::unique_ptr<Puer::Device> g_DX11Device;
 std::unique_ptr<App> g_app;
 
@@ -34,7 +40,20 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_ LPWSTR    lpCmdLine,
                      _In_ int       nCmdShow)
 {
-    UNREFERENCED_PARAMETER(hPrevInstance);
+    
+	//
+	
+	
+	
+	
+	
+	
+	//
+	
+	
+	
+	
+	UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: ここにコードを挿入してください。

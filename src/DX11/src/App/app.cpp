@@ -80,36 +80,35 @@ void App::Init() {
 */
 	SimpleVertex vertices[] =
 	{
-		{ XMFLOAT4(-1.0f, 1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
-		{ XMFLOAT4(1.0f, 1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
-		{ XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
-		{ XMFLOAT4(-1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
+		{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
+		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
+		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
+		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
 
-		{ XMFLOAT4(-1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
-		{ XMFLOAT4(1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
-		{ XMFLOAT4(1.0f, -1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
-		{ XMFLOAT4(-1.0f, -1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
+		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
+		{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
+		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
+		{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, -1.0f, 0.0f) },
 
-		{ XMFLOAT4(-1.0f, -1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT4(-1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT4(-1.0f, 1.0f, -1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT4(-1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(-1.0f, 0.0f, 0.0f) },
 
-		{ XMFLOAT4(1.0f, -1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT4(1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT4(1.0f, 1.0f, -1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-		{ XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
 
-		{ XMFLOAT4(-1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
-		{ XMFLOAT4(1.0f, -1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
-		{ XMFLOAT4(1.0f, 1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
-		{ XMFLOAT4(-1.0f, 1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
+		{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
+		{ XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
+		{ XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
+		{ XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, -1.0f) },
 
-		{ XMFLOAT4(-1.0f, -1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
-		{ XMFLOAT4(1.0f, -1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
-		{ XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
-		{ XMFLOAT4(-1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
-	};
+		{ XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
+		{ XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
+		{ XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
+		{ XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) }, };
 
 	D3D11_BUFFER_DESC bd;
 	ZeroMemory(&bd, sizeof(bd));
@@ -320,7 +319,7 @@ void App::Render(){
 		//*  Path 1 GBuffer
 		// Clear the back buffer and GBuffer
 		float ClearColor[4] = { 0.0f, 0.0f, 0.0f, 0.0f }; // red, green, blue, alpha
-		ID3D11RenderTargetView *rtv[] = { rtv_[0].p, rtv_[1].p, rtv_[2].p, rtv_[3].p };
+//		ID3D11RenderTargetView *rtv[] = { rtv_[0].p, rtv_[1].p, rtv_[2].p, rtv_[3].p };
 
 		device_->GetImmediateContext()->ClearRenderTargetView(rtv_[0], ClearColor);
 		device_->GetImmediateContext()->ClearRenderTargetView(rtv_[1], ClearColor);
@@ -334,7 +333,7 @@ void App::Render(){
 		device_->GetImmediateContext()->OMSetRenderTargets(0, nullptr, nullptr);
 
 //		device_->GetImmediateContext()->OMSetRenderTargets(3, &rtv[1], &device_->GetDepthStencilView());
-		device_->GetImmediateContext()->OMSetRenderTargets(3, &rtv[1], device_->m_DepthStencilView);
+		device_->GetImmediateContext()->OMSetRenderTargets(3, &rtv_[1].p, device_->m_DepthStencilView);
 
 		program_deferred_->SetLayout();
 
@@ -358,11 +357,12 @@ void App::Render(){
 		device_->GetImmediateContext()->DrawIndexed(36, 0, 0);
 
 
-#if 1
+#if 0
+		// ita
 		// debug   Sampler、Layout、 RT、SRV、vertex、index等設定できるようにしよう・・
 		ID3D11SamplerState *ss = &device_->GetLinerSampler();
 		device_->GetImmediateContext()->PSSetSamplers(0, 1, &ss);
-		device_->GetImmediateContext()->OMSetRenderTargets(1, &rtv_[0].p, nullptr);
+		device_->GetImmediateContext()->OMSetRenderTargets(1, &rtv_[1].p, nullptr);
 		program_debug_->SetLayout();
 
 
@@ -386,7 +386,7 @@ void App::Render(){
 
 #endif
 	
-#if 0
+#if 1
 		// path 2  Light
 		ID3D11SamplerState *ss = &device_->GetLinerSampler();
 		device_->GetImmediateContext()->PSSetSamplers(0, 1, &ss );

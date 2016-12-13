@@ -21,7 +21,7 @@ class App {
 public:
 	struct SimpleVertex
 	{
-		XMFLOAT4 Pos;
+		XMFLOAT3 Pos;
 		XMFLOAT3 Normal;
 	};
 	struct ItaVertex

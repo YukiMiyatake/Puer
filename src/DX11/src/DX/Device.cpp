@@ -243,7 +243,7 @@ namespace Puer {
 			m_SwapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;			// バックバッファのフラグ
 			m_SwapChainDesc.BufferCount = 2;										// バックバッファ数
 			m_SwapChainDesc.OutputWindow = hWnd;										// 関連付けるウィンドウのハンドル
-			m_SwapChainDesc.Windowed = 1;										// ウィンドウモードで起動するか否か
+			m_SwapChainDesc.Windowed = true;										// ウィンドウモードで起動するか否か
 			m_SwapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;					// 画面更新の方法
 			m_SwapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;	// スワップチェインのフラグ
 
@@ -274,15 +274,12 @@ namespace Puer {
 				goto EXIT;
 			}
 
-			// ステンシルバッファ不要。Zバッファの深度も考えよう
-			//--------------------------------------------------------------------
-			// 深度バッファの元になるテクスチャの作成
-			//--------------------------------------------------------------------
+			ZeroMemory(&TexDesc, sizeof(TexDesc));
 			TexDesc.Width = m_SwapChainDesc.BufferDesc.Width;
 			TexDesc.Height = m_SwapChainDesc.BufferDesc.Height;
 			TexDesc.MipLevels = 1;
 			TexDesc.ArraySize = 1;
-			TexDesc.Format = DXGI_FORMAT_R24G8_TYPELESS; //DXGI_FORMAT_R24G8_TYPELESS;
+			TexDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT; //DXGI_FORMAT_R24G8_TYPELESS;
 			TexDesc.SampleDesc = m_SwapChainDesc.SampleDesc;
 			TexDesc.Usage = D3D11_USAGE_DEFAULT;
 			TexDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
@@ -301,8 +298,11 @@ namespace Puer {
 			//--------------------------------------------------------------------
 			// 深度ステンシルビューの生成
 			//--------------------------------------------------------------------
-			DepthViewDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;//DXGI_FORMAT_D24_UNORM_S8_UINT;
-			DepthViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DMS;
+			ZeroMemory(&DepthViewDesc, sizeof(DepthViewDesc));
+			DepthViewDesc.Format = TexDesc.Format;//DXGI_FORMAT_D24_UNORM_S8_UINT;
+			DepthViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+//			DepthViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DMS;
+			DepthViewDesc.Texture2D.MipSlice = 0;
 
 			DepthViewDesc.Flags = 0;
 			hr = m_pDevice->CreateDepthStencilView(
@@ -335,7 +335,7 @@ namespace Puer {
 			// ブレンドステート生成
 			//----------------------------------------------------------------------
 			{
-
+#if 0
 
 #if 0
 				D3D11_BLEND_DESC BlendDesc = {
@@ -402,13 +402,14 @@ namespace Puer {
 				}
 				hr = GetDevice()->CreateBlendState(&BlendDesc, &m_pBlendState_bg);
 
-
+#endif
 			}
 
 			//----------------------------------------------------------------------
 			// ラスタライザーステート生成
 			//----------------------------------------------------------------------
 			{
+#if 0
 				D3D11_RASTERIZER_DESC RasterizerDesc = {
 					D3D11_FILL_SOLID,	// D3D11_FILL_MODE FillMode;
 					D3D11_CULL_BACK,	// D3D11_CULL_MODE CullMode;
@@ -436,6 +437,7 @@ namespace Puer {
 					MessageBox(hWnd, _T("ラスタライザーステートの生成に失敗"), _T("ERROR"), MB_ICONSTOP);
 					goto EXIT;
 				}
+#endif
 			}
 
 			//----------------------------------------------------------------------

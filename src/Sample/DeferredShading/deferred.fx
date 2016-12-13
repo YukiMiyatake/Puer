@@ -31,8 +31,8 @@ struct PS_INPUT
 
 struct PS_OUTPUT
 {
-	float4 Position		: SV_Target1;
-	float4 NormalDepth	: SV_Target0;
+	float4 Position		: SV_Target0;
+	float4 NormalDepth	: SV_Target1;
 	float4 DiffuseAlbedo: SV_Target2;
 };
 
