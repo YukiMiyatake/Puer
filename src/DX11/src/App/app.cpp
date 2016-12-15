@@ -101,8 +101,11 @@ void App::Init() {
 		program_deferred_light_->CreatePixelShaderFromFile(L"src/shader/deferred_light.fx", "PS", nullptr, nullptr);
 
 		program_debug_ = device_->CreateProgram();
-		program_debug_->CreateVertexShaderFromFile(L"src/shader/deferred_light.fx", "VS", Puer::Util::ItaTexInputLayout, Puer::Util::itaTexInputLayoutCount(), nullptr, nullptr);
-		program_debug_->CreatePixelShaderFromFile(L"src/shader/deferred_light.fx", "PSTex1", nullptr, nullptr);
+		program_debug_->CreateVertexShaderFromFile(L"src/DX/shader/ita.hlsl", "VS", Puer::Util::ItaTexInputLayout, Puer::Util::itaTexInputLayoutCount(), nullptr, nullptr);
+		program_debug_->CreateGeometryShaderFromFile(L"src/DX/shader/ita.hlsl", "GS4", nullptr, nullptr);
+		program_debug_->CreatePixelShaderFromFile(L"src/DX/shader/ita.hlsl", "PS", nullptr, nullptr);
+//		program_debug_->CreateVertexShaderFromFile(L"src/shader/deferred_light.fx", "VS", Puer::Util::ItaTexInputLayout, Puer::Util::itaTexInputLayoutCount(), nullptr, nullptr);
+//		program_debug_->CreatePixelShaderFromFile(L"src/shader/deferred_light.fx", "PSTex1", nullptr, nullptr);
 
 	}
 
@@ -217,17 +220,17 @@ void App::Render(){
 		device_->GetImmediateContext()->DrawIndexed(36, 0, 0);
 
 
-#if 0
+#if 1
 		// ita
 		// debug   Sampler、Layout、 RT、SRV、vertex、index等設定できるようにしよう・・
 		ID3D11SamplerState *ss = &device_->GetLinerSampler();
 		device_->GetImmediateContext()->PSSetSamplers(0, 1, &ss);
-		device_->GetImmediateContext()->OMSetRenderTargets(1, &rtv_[1].p, nullptr);
+		device_->GetImmediateContext()->OMSetRenderTargets(1, &rtv_[0].p, nullptr);
 		program_debug_->SetLayout();
 
 
 
-		stride = sizeof(ItaVertex);
+		stride = sizeof(Puer::Util::ItaVertex);
 		offset = 0;
 		device_->GetImmediateContext()->IASetVertexBuffers(0, 1, &vertexBuffer_Deferred_light_.p, &stride, &offset);
 
@@ -235,6 +238,7 @@ void App::Render(){
 
 		device_->GetImmediateContext()->VSSetShader(&program_debug_->getVertexShader(), NULL, 0);
 		device_->GetImmediateContext()->VSSetConstantBuffers(0, 1, &constantBuffer_.p);
+		device_->GetImmediateContext()->GSSetShader(&program_debug_->getGeometryShader(), NULL, 0);
 		device_->GetImmediateContext()->PSSetShader(&program_debug_->getPixelShader(), NULL, 0);
 		device_->GetImmediateContext()->PSSetConstantBuffers(0, 1, &constantBuffer_.p);
 
@@ -244,9 +248,11 @@ void App::Render(){
 		//	g_pImmediateContext->PSSetShaderResources(2, 1, &g_pSRV_GBuf_Diffuse);
 		device_->GetImmediateContext()->Draw(6, 0);
 
+		device_->GetImmediateContext()->GSSetShader(nullptr, nullptr, 0);
+
 #endif
 	
-#if 1
+#if 0
 		// path 2  Light
 		ID3D11SamplerState *ss = &device_->GetLinerSampler();
 		device_->GetImmediateContext()->PSSetSamplers(0, 1, &ss );

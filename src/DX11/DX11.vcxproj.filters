@@ -104,5 +104,8 @@
     <FxCompile Include="src\shader\deferred.fx">
       <Filter>Src\shader</Filter>
     </FxCompile>
+    <FxCompile Include="src\DX\shader\ita.hlsl">
+      <Filter>Src\DX\shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

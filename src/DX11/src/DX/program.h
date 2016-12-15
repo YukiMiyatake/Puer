@@ -60,6 +60,13 @@ namespace Puer {
 				ID3DX11ThreadPump *pPump
 			);
 
+			HRESULT CreateGeometryShaderFromFile(
+				WCHAR* szFileName,
+				LPCSTR szEntryPoint,
+				LPCSTR szShaderModel,
+				ID3DX11ThreadPump *pPump
+			);
+
 			void SetLayout();
 
 

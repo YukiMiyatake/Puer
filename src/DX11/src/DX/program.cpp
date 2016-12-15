@@ -153,6 +153,42 @@ namespace Puer {
 			return(hr);
 		}
 
+
+		HRESULT Program::CreateGeometryShaderFromFile(
+			WCHAR* szFileName,
+			LPCSTR szEntryPoint,
+			LPCSTR szShaderModel,
+			ID3DX11ThreadPump *pPump
+		) {
+
+			HRESULT hr = S_OK;
+			ID3DBlob* ppBlobOut = nullptr;
+			ID3DBlob* pErrorBlob = nullptr;
+
+			if (szShaderModel == nullptr) {
+				szShaderModel = "gs_4_0";
+			}
+
+
+			hr = CompileShaderFromFile(szFileName, szEntryPoint, szShaderModel, pPump, &ppBlobOut);
+			if (FAILED(hr)) goto Err;
+
+			hr = device_.GetDevice()->CreateGeometryShader((ppBlobOut)->GetBufferPointer(), (ppBlobOut)->GetBufferSize(), NULL, &geometryShader_);
+			if (FAILED(hr)) goto Err;
+
+
+		Err:
+			if (pErrorBlob) {
+				OutputDebugStringA((char*)pErrorBlob->GetBufferPointer());
+				pErrorBlob->Release();
+				pErrorBlob = nullptr;
+			}
+
+			if (&ppBlobOut)if (ppBlobOut)(ppBlobOut)->Release();
+
+			return(hr);
+		}
+
 		void Program::SetLayout() {
 			device_.GetImmediateContext()->IASetInputLayout(vertex_layout_);
 		}
