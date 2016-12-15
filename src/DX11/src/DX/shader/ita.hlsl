@@ -108,6 +108,115 @@ void GS4(triangle PSInput input[3], inout TriangleStream<PSInput> OutputStream)
 }
 
 
+[maxvertexcount(27)]
+void GS9(triangle PSInput input[3], inout TriangleStream<PSInput> OutputStream)
+{
+	PSInput output = (PSInput)0;
+	float4 pos[3];
+
+
+	for (uint i = 0; i<3; i++)
+	{
+		pos[i] = input[i].Position * float4(0.333, 0.333, 1, 1);
+
+		output.Position = pos[i] + float4(-0.666, +0.666, 0, 0);
+		output.TexCoord = float3(input[i].TexCoord.xy, 0);
+		//		output.Color = float3(0, 1, 0);
+
+		OutputStream.Append(output);
+	}
+	OutputStream.RestartStrip();
+
+	for (uint i = 0; i<3; i++)
+	{
+		output.Position = pos[i] + float4(+0.0, +0.666, 0, 0);
+		output.TexCoord = float3(input[i].TexCoord.xy, 1);
+		//		output.Color = float3(0, 0, 1);
+
+		OutputStream.Append(output);
+	}
+	OutputStream.RestartStrip();
+
+	for (uint i = 0; i<3; i++)
+	{
+		output.Position = pos[i] + float4(+0.666, +0.666, 0, 0);
+		output.TexCoord = float3(input[i].TexCoord.xy, 2);
+		//		output.Color = float3(0, 0, 1);
+
+		OutputStream.Append(output);
+	}
+	OutputStream.RestartStrip();
+
+
+
+	for (uint i = 0; i<3; i++)
+	{
+		output.Position = pos[i] + float4(-0.666, +0.0, 0, 0);
+		output.TexCoord = float3(input[i].TexCoord.xy, 3);
+		//		output.Color = float3(0, 1, 0);
+
+		OutputStream.Append(output);
+	}
+	OutputStream.RestartStrip();
+
+	for (uint i = 0; i<3; i++)
+	{
+		output.Position = pos[i] + float4(+0.0, +0.0, 0, 0);
+		output.TexCoord = float3(input[i].TexCoord.xy, 4);
+		//		output.Color = float3(0, 0, 1);
+
+		OutputStream.Append(output);
+	}
+	OutputStream.RestartStrip();
+
+	for (uint i = 0; i<3; i++)
+	{
+		output.Position = pos[i] + float4(+0.666, +0.0, 0, 0);
+		output.TexCoord = float3(input[i].TexCoord.xy, 5);
+		//		output.Color = float3(0, 0, 1);
+
+		OutputStream.Append(output);
+	}
+	OutputStream.RestartStrip();
+
+
+
+
+	for (uint i = 0; i<3; i++)
+	{
+		output.Position = pos[i] + float4(-0.666, -0.666, 0, 0);
+		output.TexCoord = float3(input[i].TexCoord.xy, 6);
+		//		output.Color = float3(0, 1, 0);
+
+		OutputStream.Append(output);
+	}
+	OutputStream.RestartStrip();
+
+	for (uint i = 0; i<3; i++)
+	{
+		output.Position = pos[i] + float4(+0.0, -0.666, 0, 0);
+		output.TexCoord = float3(input[i].TexCoord.xy, 7);
+		//		output.Color = float3(0, 0, 1);
+
+		OutputStream.Append(output);
+	}
+	OutputStream.RestartStrip();
+
+	for (uint i = 0; i<3; i++)
+	{
+		output.Position = pos[i] + float4(+0.666, -0.666, 0, 0);
+//		output.TexCoord = float3(input[i].TexCoord.xy, 7);
+		//		output.Color = float3(0, 0, 1);
+
+		OutputStream.Append(output);
+	}
+	OutputStream.RestartStrip();
+
+
+
+}
+
+
 float4 PS(PSInput input) : SV_Target
 {
 //	return 	float4(input.Color,0);

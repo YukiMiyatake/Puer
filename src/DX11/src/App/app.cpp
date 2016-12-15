@@ -102,7 +102,7 @@ void App::Init() {
 
 		program_debug_ = device_->CreateProgram();
 		program_debug_->CreateVertexShaderFromFile(L"src/DX/shader/ita.hlsl", "VS", Puer::Util::ItaTexInputLayout, Puer::Util::itaTexInputLayoutCount(), nullptr, nullptr);
-		program_debug_->CreateGeometryShaderFromFile(L"src/DX/shader/ita.hlsl", "GS4", nullptr, nullptr);
+		program_debug_->CreateGeometryShaderFromFile(L"src/DX/shader/ita.hlsl", "GS9", nullptr, nullptr);
 		program_debug_->CreatePixelShaderFromFile(L"src/DX/shader/ita.hlsl", "PS", nullptr, nullptr);
 //		program_debug_->CreateVertexShaderFromFile(L"src/shader/deferred_light.fx", "VS", Puer::Util::ItaTexInputLayout, Puer::Util::itaTexInputLayoutCount(), nullptr, nullptr);
 //		program_debug_->CreatePixelShaderFromFile(L"src/shader/deferred_light.fx", "PSTex1", nullptr, nullptr);
